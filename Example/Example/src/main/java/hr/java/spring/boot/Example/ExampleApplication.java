@@ -1,4 +1,4 @@
-package hr.java.spring.boot.Example;
+package hr.java.spring.boot.HardwareShop;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
