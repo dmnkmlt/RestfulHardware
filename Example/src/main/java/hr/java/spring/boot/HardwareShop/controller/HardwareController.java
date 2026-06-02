@@ -21,7 +21,7 @@ public class HardwareController {
     }
 
     @GetMapping("/get-hardwares-by-type/{type}")
-    public List<HardwareDto> getHardwareSByType(@PathVariable String hardwareType){
-        return hardwareService.getHardwaresByType(hardwareType);
+    public List<HardwareDto> getHardwareSByType(@PathVariable String type){
+        return hardwareService.getHardwaresByType(type);
     }
 }

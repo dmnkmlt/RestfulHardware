@@ -30,6 +30,12 @@ public class HardwareServiceImpl implements HardwareService {
     }
 
     private List<HardwareDto> toDto(List<Hardware> hardwares) {
-        return List.of();
+        return hardwares.stream()
+                .map(h -> new HardwareDto(
+                        h.getCode(),
+                        h.getPrice(),
+                        h.getType()
+                ))
+                .toList();
     }
 }
