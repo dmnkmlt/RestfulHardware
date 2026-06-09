@@ -48,7 +48,7 @@ public class HardwareRepositoryImpl implements HardwareRepository {
 
     @Override
     public Optional<Hardware> updateHardware(Hardware hardware, int id){
-        Optional<Hardware> candidates = hardwareList.stream().filter(hardware1 -> hardware.getId() == id).findFirst();
+        Optional<Hardware> candidates = hardwareList.stream().filter(hardware1 -> hardware1.getId() == id).findFirst();
         if(candidates.isPresent()) {
             Hardware updatedHardware = candidates.get();
 

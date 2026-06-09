@@ -62,6 +62,10 @@ public class HardwareServiceImpl implements HardwareService {
     public Optional<HardwareDto> updateHardware(HardwareDto hardwareDto, int hardwareId) {
         Optional<Hardware> updatedHardware = hardwareRepository.updateHardware(fromDto(hardwareDto), hardwareId);
 
+        if (updatedHardware.isPresent()) {
+            return Optional.of(toDto(updatedHardware.get()));
+        }
+
         return Optional.empty();
     }
 

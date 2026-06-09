@@ -38,8 +38,7 @@ public class HardwareController {
     @PutMapping("/hardware/{hardwareId}")
     public ResponseEntity<?> updateHardware(@Valid @RequestBody HardwareDto hardwareDto, @PathVariable int hardwareId) {
         if(hardwareService.hardwareByIdExists(hardwareId)) {
-            hardwareService.updateHardware(hardwareDto, hardwareId);
-            return ResponseEntity.ok().build();
+            return ResponseEntity.ok(hardwareService.updateHardware(hardwareDto, hardwareId));
         } else {
             return ResponseEntity.notFound().build();
         }
