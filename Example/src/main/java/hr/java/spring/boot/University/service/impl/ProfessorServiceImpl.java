@@ -23,7 +23,7 @@ public class ProfessorServiceImpl implements ProfessorService {
 
     @Override
     public int addProfessorToProfessorList(ProfessorDto professorDto) {
-        return 1;
+        return professorRepository.addProfessorToProfessorList(professorDtoToProfessor(professorDto));
     };
 
     @Override
@@ -33,11 +33,17 @@ public class ProfessorServiceImpl implements ProfessorService {
 
     @Override
     public boolean professorByIdExists(int professorId) {
-        return false;
+        return professorRepository.professorByIdExists(professorId);
     };
 
     @Override
     public Optional<ProfessorDto> updateProfessorById(ProfessorDto professor, int professorId) {
+        Optional<Professor> updatedProfessor = professorRepository.updateProfessorById(professorDtoToProfessor(professor), professorId);
+
+        if(updatedProfessor.isPresent()) {
+            return Optional.of(professorToProfessorDto(updatedProfessor.get()));
+        }
+
         return Optional.empty();
     };
 

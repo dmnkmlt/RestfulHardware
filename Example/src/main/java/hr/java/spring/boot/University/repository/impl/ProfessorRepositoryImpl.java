@@ -25,8 +25,12 @@ public class ProfessorRepositoryImpl implements ProfessorRepository {
     }
 
     @Override
-    public int addProfessorToProfessorList() {
-        return 1;
+    public int addProfessorToProfessorList(Professor professor) {
+        int newProfessorId = professorList.size() + 1;
+        professor.setProfessorId(newProfessorId);
+        professorList.add(professor);
+
+        return newProfessorId;
     }
 
     @Override
@@ -40,6 +44,19 @@ public class ProfessorRepositoryImpl implements ProfessorRepository {
 
     @Override
     public Optional<Professor> updateProfessorById(Professor professor, int professorId) {
+        Optional<Professor> professorToUpdate = professorList.stream().filter(professor1 -> professor1.getProfessorId() == professorId).findFirst();
+
+        if (professorToUpdate.isPresent()) {
+            Professor updatedProfessor = professorToUpdate.get();
+
+            updatedProfessor.setName(professor.getName());
+            updatedProfessor.setSurname(professor.getSurname());
+            updatedProfessor.setDateOfBirth(professor.getDateOfBirth());
+            updatedProfessor.setTitle(professor.getTitle());
+
+            return Optional.of(updatedProfessor);
+        }
+
         return Optional.empty();
     }
 

@@ -28,8 +28,8 @@ public class StudentServiceImpl implements StudentService {
     };
 
     @Override
-    public int addStudentToStudentList() {
-        return 1;
+    public int addStudentToStudentList(StudentDto studentDto) {
+        return studentRepository.addStudentToStudentList(studentDtoToStudent(studentDto));
     };
 
     @Override
@@ -39,11 +39,17 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public boolean studentByIdExists(int studentId) {
-        return false;
+        return studentRepository.studentByIdExists(studentId);
     };
 
     @Override
     public Optional<StudentDto> updateStudentById(StudentDto student, int studentId) {
+        Optional<Student> updatedStudent = studentRepository.updateStudentById(studentDtoToStudent(student), studentId);
+
+        if(updatedStudent.isPresent()) {
+            return Optional.of(studentToStudentDto(updatedStudent.get()));
+        }
+
         return Optional.empty();
     };
 

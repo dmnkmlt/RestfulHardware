@@ -4,6 +4,7 @@ import hr.java.spring.boot.University.dto.ProfessorDto;
 import hr.java.spring.boot.University.service.ProfessorService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,5 +28,14 @@ public class ProfessorController {
     @PostMapping("/professors")
     public int addProfessorToProfessorList(@Valid @RequestBody ProfessorDto professorDto) {
         return professorService.addProfessorToProfessorList(professorDto);
+    }
+
+    @PutMapping("/professors/{professorId}")
+    public ResponseEntity<?> updateProfessorById(@Valid @RequestBody ProfessorDto professorDto, @PathVariable int professorId) {
+        if(professorService.professorByIdExists(professorId)) {
+            return ResponseEntity.ok(professorService.updateProfessorById(professorDto, professorId));
+        }
+
+        return ResponseEntity.notFound().build();
     }
 }

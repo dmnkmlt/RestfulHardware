@@ -31,8 +31,12 @@ public class StudentRepositoryImpl implements StudentRepository {
     };
 
     @Override
-    public int addStudentToStudentList() {
-        return 1;
+    public int addStudentToStudentList(Student student) {
+        int newStudentId = studentList.size() + 1;
+        student.setStudentId(newStudentId);
+        studentList.add(student);
+
+        return newStudentId;
     };
 
     @Override
@@ -47,6 +51,20 @@ public class StudentRepositoryImpl implements StudentRepository {
 
     @Override
     public Optional<Student> updateStudentById(Student student, int studentId) {
+        Optional<Student> studentToUpdate = studentList.stream().filter(student1 -> student1.getStudentId() == studentId).findFirst();
+
+        if (studentToUpdate.isPresent()) {
+            Student updatedStudent = studentToUpdate.get();
+
+            updatedStudent.setName(student.getName());
+            updatedStudent.setSurname(student.getSurname());
+            updatedStudent.setDateOfBirth(student.getDateOfBirth());
+            updatedStudent.setDateOfEnrollment(student.getDateOfEnrollment());
+            updatedStudent.setUniversity(student.getUniversity());
+
+            return Optional.of(updatedStudent);
+        }
+
         return Optional.empty();
     };
 }
