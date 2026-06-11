@@ -31,7 +31,7 @@ public class JdbcHardwareRepository implements HardwareRepository {
 
     @Override
     public int saveNewHardware(Hardware hardware) {
-        return jdbcTemplate.update("INSERT INTO EMPLOYEE (CODE, PRICE, TYPE) VALUES (?, ?, ?)", hardware.getCode(), hardware.getPrice(), hardware.getType());
+        return jdbcTemplate.update("INSERT INTO HARDWARE (CODE, PRICE, TYPE) VALUES (?, ?, ?)", hardware.getCode(), hardware.getPrice(), hardware.getType());
     };
 
     @Override
